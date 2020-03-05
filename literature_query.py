@@ -8,23 +8,25 @@ with open("document.txt","r") as sent_list:
 with open("query.txt","r") as query_list:
     f_q.append(query_list.read())
 
-def literature_query():
+f_d_l = [str(f_d).lower()]#忽略大小写
+f_q_l = [str(f_q).lower()]
 
-    f_d_s = f_d.split("." or  "!" or "?") # 将查询的文献进行分割
-    f_q_s = f_q.split(" ")  # 将查询的单词进行分割
+f_d_l_s = [str(f_d_l).split("." or  "!" or "?")] # 将查询的文献进行分割
+f_q_l_s = [str(f_q_l).split(" ") ]# 将查询的单词进行分割
 
-    f_d_s_l = f_d_s.lower() #忽略大小写
-    f_q_s_l = f_q_s.lower()
+line_num = 0 #记录文献的行数
+word_num = 0 #记录单词书
+for word_num in range(len(f_q_l_s)):
+    for line_num in range(len(f_d_l_s)):
+        if f_q_l_s[word_num] in f_d_l_s[line_num]:
+            f_d_l_s[line_num] = '$'
+            line_num += 1
+            word_num += 1
+            print("{}/{}".format(line_num, line_num))
+        else:
+            print("None")
 
-    if f_q_s_l in f_d_s_l:
-
-        line_num = f_d_s_l.index(f_q_s_l)
-        word = f_d_s_l[cind].split("")
-        word_num = word.index(f_q_s_l)
-
-    print("{}/{}".format(line_num,word_num))
 
 
 
-literature_query()
 
